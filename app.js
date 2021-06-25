@@ -7,9 +7,9 @@ app.use((req, res, next) => {
 
   res.on('finish', () => {
     const resTime = new Date()
-    console.log('伺服器收到請求的時間：', reqTime)
-    console.log('伺服器送出回應的時間：', resTime)
-    console.log(` ${reqTime.getFullYear()}-${reqTime.getMonth() + 1}-${reqTime.getDate()} ${reqTime.getHours()}:${reqTime.getMinutes()}:${reqTime.getSeconds()} |  ${req.method} from ${req.path} | total time:  ${resTime - reqTime}ms`)
+    const reqMsg = `${reqTime.getFullYear()}-${reqTime.getMonth() + 1}-${reqTime.getDate()} ${reqTime.getHours()}:${reqTime.getMinutes()}:${reqTime.getSeconds()}  |  ${req.method} from ${req.path}`
+    console.log(reqMsg)
+    console.log(`${reqMsg} | total time:  ${resTime - reqTime}ms`)
   })
   next()
 })

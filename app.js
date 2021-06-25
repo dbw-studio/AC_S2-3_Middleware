@@ -7,9 +7,14 @@ app.use((req, res, next) => {
 
   res.on('finish', () => {
     const resTime = new Date()
-    const reqMsg = `${reqTime.getFullYear()}-${reqTime.getMonth() + 1}-${reqTime.getDate()} ${reqTime.getHours()}:${reqTime.getMinutes()}:${reqTime.getSeconds()}  |  ${req.method} from ${req.path}`
+    const reqMsg = logMsg(reqTime)
+    const resMsg = logMsg(resTime)
     console.log(reqMsg)
-    console.log(`${reqMsg} | total time:  ${resTime - reqTime}ms`)
+    console.log(`${resMsg} | total time:  ${resTime - reqTime}ms`)
+
+    function logMsg (time) {
+      return `${time.getFullYear()}-${time.getMonth() + 1}-${time.getDate()} ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}:${time.getMilliseconds()}  |  ${req.method} from ${req.path}`
+    }
   })
   next()
 })
